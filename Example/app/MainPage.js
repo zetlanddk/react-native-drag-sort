@@ -4,49 +4,72 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    SafeAreaView,
+    ScrollView,
 } from 'react-native'
-import ScrollPage from "./container/ScrollPage";
-import NonScrollPage from "./container/NonScrollPage";
-import {CommonSortPage} from "./container/CommonSortPage";
 const {width}  = Dimensions.get('window')
 
 export default class MainPage extends Component{
 
     render() {
         return (
-            <View style={styles.container}>
-                {
-                    this.renderButtonStyle('ScrollView Page',()=>{
-                        this.props.navigation.navigate('ScrollPage')
-                    })
-                }
-                {
-                    this.renderButtonStyle('Non-ScrollView Page',()=>{
-                        this.props.navigation.navigate('NonScrollPage')
-                    })
-                }
-                {
-                    this.renderButtonStyle('Fixed number of rows',()=>{
-                        this.props.navigation.navigate('FixedRowsPage')
-                    })
-                }
-                {
-                    this.renderButtonStyle('CommonSortPage',()=>{
-                        this.props.navigation.navigate('CommonSortPage')
-                    })
-                }
-                {
-                    this.renderButtonStyle('OneRowsPage',()=>{
-                        this.props.navigation.navigate('OneRowsPage')
-                    })
-                }
-                {
-                    this.renderButtonStyle('SortAndFixedPage', () => {
-                        this.props.navigation.navigate('SortAndFixedPage')
-                    })
-                }
-            </View>
+            <SafeAreaView>
+                <ScrollView>
+                    <View style={styles.container}>
+                        {
+                            this.renderButtonStyle('AutomaticSlidingOnePage', () => {
+                                this.props.navigation.navigate('AutomaticSlidingOnePage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('AutomaticSlidingThreePage', () => {
+                                this.props.navigation.navigate('AutomaticSlidingThreePage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('ScrollView Page',()=>{
+                                this.props.navigation.navigate('ScrollPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('ScrollFixedAddPage', () => {
+                                this.props.navigation.navigate('ScrollFixedAddPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('Non-ScrollView Page',()=>{
+                                this.props.navigation.navigate('NonScrollPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('Fixed number of rows',()=>{
+                                this.props.navigation.navigate('FixedRowsPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('CommonSortPage',()=>{
+                                this.props.navigation.navigate('CommonSortPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('OneRowsPage',()=>{
+                                this.props.navigation.navigate('OneRowsPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('SortAndFixedPage', () => {
+                                this.props.navigation.navigate('SortAndFixedPage')
+                            })
+                        }
+                        {
+                            this.renderButtonStyle('DragDeletePage', () => {
+                                this.props.navigation.navigate('DragDeletePage')
+                            })
+                        }
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 
@@ -67,7 +90,9 @@ export default class MainPage extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        width,
+        marginBottom: 20,
     },
     button: {
         width: width*0.6,

@@ -4,39 +4,10 @@ Drag and drop sort control for react-native
 ![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)
 [![npm](https://img.shields.io/npm/v/react-native-drag-sort.svg?style=flat)](https://npmjs.com/package/react-native-drag-sort)
 
-### Language
-- [English](https://github.com/mochixuan/react-native-drag-sort/blob/master/README.md) 
-- [中文](https://github.com/mochixuan/react-native-drag-sort/blob/master/README_ZH.md)
+### Version Iteration
+- [English Version Iteration](https://github.com/mochixuan/react-native-drag-sort/blob/master/README_History.md) 
+- [中文版本迭代](https://github.com/mochixuan/react-native-drag-sort/blob/master/README_ZH_History.md)
 
-### [Download Android example](https://fir.im/dragsort)
-
-### Update Progress
-
-#### 2019.7 
-> The 1.x version ends, the optimizations are optimized, and the problems that have occurred have been resolved. The 2.x version will be written next, and it is expected to add an auto-compatible ScrollView slide, slide delete function, and so on.
-
-- Fix a small problem.
-- Add a familiar keyExtractor:(item,index) => key to achieve performance optimization, similar to FlatList's keyExtractor, will not flash (repaint) when deleting Item.
-- Add the delayLongPress property: press to the time of the trigger, customize how long to start
-
-#### 2019.6 
-> Added the top fixed function, you can set the start of several consecutive non-dragable functions, similar to today's headlines, this function is the same as today's headline drag and drop, you can compare
-
-![ezgif.com-resize.gif](https://upload-images.jianshu.io/upload_images/2646598-405b01d61547c972.gif?imageMogr2/auto-orient/strip)
-
-#### 2019.3
-> Add a single-line drag-and-drop demo. In fact, this function is consistent. This drag-and-drop plug-in is inherently adaptive. It will take time to optimize the ScrollView problem and make the control bring the ScrollView function。
-
-![one-line.gif](https://upload-images.jianshu.io/upload_images/2646598-dd17c76291514316.gif?imageMogr2/auto-orient/strip)
-
-#### 2019.2: 
-> Optimize drag and drop automatically when not moving, now this plugin should have no problems. Add a real-world demo example, and there will be time to animate this example. When deleting, the item goes down to the item animation to be selected, and the item to be selected is selected. And automatically slide down the animation when sliding。
-
-![demo.gif](https://upload-images.jianshu.io/upload_images/2646598-bd118152420cc0a9.gif?imageMogr2/auto-orient/strip)
-
-### Performance
-
-![Demonstration.gif](https://upload-images.jianshu.io/upload_images/2646598-f3ece6209cb07e43.gif?imageMogr2/auto-orient/strip)
 
 ### Installation
 
@@ -44,53 +15,93 @@ Drag and drop sort control for react-native
 yarn add react-native-drag-sort
 or
 npm i react-native-drag-sort --save 
+
+export { DragSortableView, AutoDragSortableView }
 ```
 
-### Example
-- [ScrollView](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/ScrollPage.js)
-- [View](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/NonScrollPage.js)
-- [Fixed Rows](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/FixedRowsPage.js)
+### Performance（GIF）
 
-``` react
+[AutomaticSlidingOnePage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/AutomaticSlidingOnePage.js) | [AutomaticSlidingThreePage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/AutomaticSlidingThreePage.js)
+| ------ | ----------- | 
+| ![](https://user-gold-cdn.xitu.io/2020/2/15/170487f5ce137e15?w=240&h=514&f=gif&s=2527386) | ![](https://user-gold-cdn.xitu.io/2020/2/15/1704896e0729f8b7?w=240&h=514&f=gif&s=4958289) 
+
+[ScrollFixedAddPage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/ScrollFixedAddPage.js) | [DragDeletePage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/DragDeletePage.js)  
+| ------ | ----------- |
+| ![](https://user-gold-cdn.xitu.io/2020/2/10/1702ea81299f097d?w=240&h=400&f=gif&s=863218)  | ![dragdelete.gif](https://upload-images.jianshu.io/upload_images/2646598-4d22ddb8f92a6563.gif?imageMogr2/auto-orient/strip)  
+
+
+[SortAndFixedPage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/SortAndFixedPage.js)  | [OneRowsPage](https://github.com/mochixuan/react-native-drag-sort/blob/master/Example/app/container/OneRowsPage.js)  
+| ------ | ----------- | 
+| ![ezgif.com-resize.gif](https://upload-images.jianshu.io/upload_images/2646598-405b01d61547c972.gif?imageMogr2/auto-orient/strip)  | ![one-line.gif](https://upload-images.jianshu.io/upload_images/2646598-dd17c76291514316.gif?imageMogr2/auto-orient/strip)  
+
+### API
+
+#### AutoDragSortableView、DragSortableView
+
+isRequired if there is a * in the name field
+
+|name|Proptypes|Description|
+----|----|-----|
+|**dataSource** *|array|
+|**parentWidth**|number|parent width
+|**childrenHeight** *|number|Each item height
+|**childrenWidth** *|number|Each item width
+|**marginChildrenTop**|number|So the item's outermost view adds margin, you can only use this method.
+|**marginChildrenBottom**|number
+|**marginChildrenLeft**|number
+|**marginChildrenRight**|number
+|**sortable**|bool|Do not allow dragging
+|**onClickItem**|func|click
+|**onDragStart**|func
+|**onDragEnd**|func
+|**onDataChange**|func|This method is called every time the data changes.
+|**renderItem** *|func|render item view
+|**fixedItems**|array|no remove
+|**keyExtractor**|func|(item,index) => key
+|**delayLongPress**|number
+|**isDragFreely**|bool|Whether to limit the drag space
+|**onDragging**|func
+|**maxScale**|number
+|**minOpacity**|number
+
+#### The following attributes belong only to AutoDragSortableView
+
+|name|Proptypes|Description|
+----|----|-----|
+|**scaleDuration**|number
+|**slideDuration**|number
+|**autoThrottle**|number
+|**autoThrottleDuration**|number
+|**renderHeaderView**|element
+|**headerViewHeight**|number
+|**scrollIndicatorInsets**|({top:number, left:number, bottom:number, right:number})|
+|**renderBottomView**|element
+|**bottomViewHeight**|number
+|**onScrollListener** | (event: NativeSyntheticEvent<NativeScrollEvent>) => void 
+|**onScrollRef** | (ref: any) => void
+
+### Example
+
+```jsx
 <DragSortableView
     dataSource={this.state.data}
     parentWidth={parentWidth}
     childrenWidth= {childrenWidth}
     childrenHeight={childrenHeight}
-    marginChildrenTop={marginChildrenTop}
-    onDataChange = {(data)=>{
-        // delete or add data to refresh
-        if (data.length != this.state.data.length) {
-            this.setState({
-                data: data
-            })
-        }
-    }}
-    onClickItem={(data,item,index)=>{}}
+    keyExtractor={(item,index)=> item.id}
     renderItem={(item,index)=>{
         return this.renderItem(item,index)
-    }}/>
-
+    }}
+/>
+    
+<AutoDragSortableView
+    dataSource={this.state.data}
+    parentWidth={parentWidth}
+    childrenWidth= {childrenWidth}
+    childrenHeight={childrenHeight}
+    keyExtractor={(item,index)=> item.id}
+    renderItem={(item,index)=>{
+        return this.renderItem(item,index)
+    }}
+/>
 ```
-
-### API
-- **dataSource**: PropTypes.array.isRequired :
-- **parentWidth**: PropTypes.number //parent width
-- **childrenHeight**: PropTypes.number.isRequired, //Each item height
-- **childrenWidth**: PropTypes.number.isRequired,//Each item width
-
-- **marginChildrenTop**: PropTypes.number,  //So the item's outermost view adds margin, you can only use this method.
-- **marginChildrenBottom**: PropTypes.number,
-- **marginChildrenLeft** : PropTypes.number,
-- **marginChildrenRight** : PropTypes.number,
-
-- **sortable**: PropTypes.bool, //Do not allow dragging
-
-- **onClickItem**: PropTypes.func, //click
-- **onDragStart**: PropTypes.func, 
-- **onDragEnd** : PropTypes.func,
-- **onDataChange** : PropTypes.func, //This method is called every time the data changes.
-- **renderItem** : PropTypes.func.isRequired, //render item view
-- **fixedItems**:PropTypes.array //no remove
-- **keyExtractor**: keyExtractor: PropTypes.func //(item,index) => key
-- **delayLongPress**: PropTypes.number
