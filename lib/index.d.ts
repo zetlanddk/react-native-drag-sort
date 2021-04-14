@@ -25,6 +25,9 @@ interface IProps{
   delayLongPress?: number;
   isDragFreely?: boolean;
   onDragging?: (gestureState: any, left: number, top: number, moveToIndex: number) => void;
+  
+  disabledItems?: string[];
+  triggerHaptic?: () => void;
 
   maxScale?: number;
   minOpacity?: number;
